@@ -1,4 +1,4 @@
-#  Setup Guide
+#Script Setup Guide
 
 This guide provides general instructions for setting up and running any script built for the DreamBot API in Old School RuneScape (OSRS). It is designed for beginners to help you get started with running custom scripts, including those for activities like fishing, mining, woodcutting, or other automated tasks.
 
@@ -6,8 +6,8 @@ This guide provides general instructions for setting up and running any script b
 
 To run a DreamBot script, you need the following:
 
-- **DreamBot Client**: Download the DreamBot client from DreamBot's official website.
-- **Java Development Kit (JDK)**: Version 8 or higher. Download from Oracle or use an open-source alternative like OpenJDK.
+- **DreamBot Client**: Download the DreamBot client from [DreamBot's official website](https://dreambot.org/).
+- **Java Development Kit (JDK)**: Version 8 or higher. Download from [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html) or use an open-source alternative like OpenJDK.
 - **Development Environment** (optional): An IDE like IntelliJ IDEA or Eclipse for compiling scripts from source code.
 - **OSRS Account**: An active Old School RuneScape account with the required skills and items for the script you want to run.
 - **DreamBot Account**: Required to log in to the DreamBot client.
@@ -26,23 +26,47 @@ To run a DreamBot script, you need the following:
      - Mac/Linux: `~/DreamBot/Scripts/`
    - If the `Scripts` folder doesn’t exist, create it manually.
 
-3. **Add the Script**:
+3. **Prepare IntelliJ IDEA for Script Compilation** (if using source code):
 
-   - Obtain the script file (`.java` or compiled `.jar`):
-     - For a `.java` file, you need to compile it into a `.jar` file using an IDE or command-line tools.
-     - For a pre-compiled `.jar` file, simply place it in the `Scripts` folder.
-   - To compile a `.java` file:
-     - Open the script in an IDE like IntelliJ IDEA or Eclipse.
-     - Ensure the DreamBot API is included in your project dependencies (available via the DreamBot client or forums).
-     - Compile the script to generate a `.jar` file.
-     - Move the compiled `.jar` to the `Scripts` folder.
+   - **Install IntelliJ IDEA**:
+     - Download and install IntelliJ IDEA Community Edition from [JetBrains](https://www.jetbrains.com/idea/download/).
+     - Launch IntelliJ IDEA and create a new Java project or open an existing one.
 
-4. **Install Java**:
+   - **Adding Dependencies**:
+     - Add the DreamBot client as a library to your project to access the DreamBot API.
+     1. Click on `File` in the top left and select `Project Structure...`.
+     2. In the opened window, click on `Libraries` on the left, then click the `+` icon at the top and select `Java`.
+     3. Navigate to the DreamBot `BotData` folder and select the `client.jar` file:
+        - Windows: `C:\Users\YourUsername\DreamBot\BotData\client.jar`
+        - Linux/Mac: `/home/YourUsername/DreamBot/BotData/client.jar`
+     4. Press `Apply` and `OK` at the bottom right of the window.
+
+   - **Adding an Artifact**:
+     - To compile the script into a `.jar` file that DreamBot can recognize, create an artifact in IntelliJ.
+     1. Click on `File` in the top left and select `Project Structure...`.
+     2. Select `Artifacts` on the left, then click the `+` icon at the top and choose `JAR` -> `From modules with dependencies...`. Press `OK` in the next window.
+     3. Change the `Output directory` to the DreamBot `Scripts` folder:
+        - Windows: `C:\Users\YourUsername\DreamBot\Scripts\`
+        - Linux/Mac: `/home/YourUsername/DreamBot/Scripts/`
+     4. Remove the `client.jar` dependency from the artifact to avoid including it in the output:
+        - Right-click `client.jar` in the artifact list and select `Remove`.
+     5. Press `Apply` and `OK`.
+
+   - **Compile the Script**:
+     - In IntelliJ, go to `Build` -> `Build Artifacts...` and select your artifact, then choose `Build`.
+     - The compiled `.jar` file will appear in the DreamBot `Scripts` folder (e.g., `C:\Users\YourUsername\DreamBot\Scripts\YourScript.jar`).
+
+4. **Add the Script**:
+
+   - If you have a pre-compiled `.jar` file, place it directly in the `Scripts` folder.
+   - If you have a `.java` file, compile it into a `.jar` using the steps above or another IDE/command-line tool, then place the `.jar` in the `Scripts` folder.
+
+5. **Install Java**:
 
    - Verify that JDK 8 or higher is installed by running `java -version` in a terminal or command prompt.
    - If not installed, download and install it from the Oracle website or another trusted source.
 
-5. **Prepare In-Game Requirements**:
+6. **Prepare In-Game Requirements**:
 
    - Check the script’s documentation or source code for specific requirements (e.g., skill levels, items, or locations).
    - Ensure your OSRS character has the necessary skills, equipment, and items in your inventory or equipped.
@@ -89,11 +113,12 @@ While features vary by script, many DreamBot scripts include:
 
 ## Troubleshooting
 
-- **Script Not Appearing**: Ensure the `.jar` or `.java` file is in the `Scripts` folder. If using a `.java` file, compile it to a `.jar`. Restart the DreamBot client.
+- **Script Not Appearing**: Ensure the `.jar` file is in the `Scripts` folder. If using a `.java` file, compile it to a `.jar` as described above. Restart the DreamBot client.
 - **Script Fails to Start**: Check the DreamBot console for error messages. Verify that you meet the script’s skill and item requirements.
 - **Missing Items/Equipment**: Ensure you have the required items in your inventory or equipped, as specified by the script.
 - **GUI Not Showing**: Confirm Java is installed correctly and the DreamBot client is up to date. Check the console for errors.
 - **Script Stops Unexpectedly**: Review the script’s documentation for location or setup requirements. Ensure you’re in the correct area and have necessary resources.
+- **IntelliJ Compilation Issues**: Verify that the `client.jar` is added as a library and not included in the artifact output. Ensure the output directory is set to the `Scripts` folder.
 
 ## Notes
 
